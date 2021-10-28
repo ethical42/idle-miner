@@ -1,15 +1,18 @@
 import pyautogui
 import pyperclip
 import time
+from time import strftime
+from time import gmtime
 import datetime
 import random
 
-actionWait = 120
+actionWait = 60
 counter_birth = 0
 sellLoop = 1
 loops = 0
 total_loops = 0
 hour_run = 0
+start_time = time.time()
 
 pets = [
     'bat',
@@ -40,23 +43,56 @@ pets = [
     'giant',
 ]
 
-# Get date time and convert to a string
-time_now = datetime.datetime.now().strftime("%H")    
-hours = int(time_now)
+current_hour = datetime.datetime.now().strftime("%H")    
+hours = int(current_hour)
+
+n = 8
+for i in range(n):
+    print( " "*(n-i-1) + "*"*(2*i+1) )
+
+print("**-Idle miner-**")
+print("*To your service*")
+print()
+
+print("[System]: Booting...")
+print()
+time.sleep(1)
+print("[FYI]: Between each action there's a cooldown for 3 seconds.")
+print()
+time.sleep(1)
+
+x = 10
+while x > 0:
+    print("[Info]: Executing actions in", x, "seconds")
+    
+    x -= 1
+    time.sleep(1)
+
+print("[Info]: Executing actions...")
+time.sleep(1)
+print()
 
 while sellLoop == 1:
-    
-    print("["+datetime.datetime.fromtimestamp(time.time()).strftime('%Y-%m-%d %H:%M:%S')+"]: Executing actions...")
-    time.sleep(10)
+    if total_loops > 0:
+        print("[Info]: Executing actions...")
+        print()
+        time.sleep(3)
     
     pyperclip.copy(';sell')
     pyautogui.press("enter")
+
+    pyperclip.copy(';sell')
+    pyautogui.hotkey('command', 'v')
+    pyautogui.press("enter")
+    print("[Action]: Sold")
+
+    time.sleep(3)
 
     if hours > hours-1 and hour_run == 0:
         pyperclip.copy(';hourly')
         pyautogui.hotkey('command', 'v')
         pyautogui.press("enter")
-        print("["+datetime.datetime.fromtimestamp(time.time()).strftime('%Y-%m-%d %H:%M:%S')+"]: Hour reward claimed...")
+        print("[Action]: Hour reward claimed")
         
         hour_run = 0
         time.sleep(3)
@@ -65,7 +101,7 @@ while sellLoop == 1:
         pyperclip.copy(';level')
         pyautogui.hotkey('command', 'v')
         pyautogui.press("enter")
-        print("["+datetime.datetime.fromtimestamp(time.time()).strftime('%Y-%m-%d %H:%M:%S')+"]: Leveled...")
+        print("[Action]: Leveled")
         
         loops = 0
         time.sleep(3)
@@ -76,68 +112,77 @@ while sellLoop == 1:
     pyperclip.copy(string)
     pyautogui.hotkey('command', 'v')
     pyautogui.press("enter")
-    print("["+datetime.datetime.fromtimestamp(time.time()).strftime('%Y-%m-%d %H:%M:%S')+"]: Upgrading "+ pet.title() +" pet...")
+    print("[Action]: Upgrading "+ pet.title() +" pet")
     
     time.sleep(actionWait)
     
     pyperclip.copy(';sell')
     pyautogui.hotkey('command', 'v')
     pyautogui.press("enter")
-    print("["+datetime.datetime.fromtimestamp(time.time()).strftime('%Y-%m-%d %H:%M:%S')+"]: Sold...")
+    print("[Action]: Sold")
     
     time.sleep(3)
 
     pyperclip.copy(';fish')
     pyautogui.hotkey('command', 'v')
     pyautogui.press("enter")
-    print("["+datetime.datetime.fromtimestamp(time.time()).strftime('%Y-%m-%d %H:%M:%S')+"]: Fished...")
+    print("[Action]: Fished")
 
     time.sleep(3)
 
     pyperclip.copy(';up b a')
     pyautogui.hotkey('command', 'v')
     pyautogui.press("enter")
-    print("["+datetime.datetime.fromtimestamp(time.time()).strftime('%Y-%m-%d %H:%M:%S')+"]: Upgraded backpack...")
+    print("[Action]: Upgraded backpack")
     
     time.sleep(actionWait)
 
     pyperclip.copy(';sell')
     pyautogui.hotkey('command', 'v')
     pyautogui.press("enter")
-    print("["+datetime.datetime.fromtimestamp(time.time()).strftime('%Y-%m-%d %H:%M:%S')+"]: Sold...")
+    print("[Action]: Sold")
 
     time.sleep(3)
 
     pyperclip.copy(';up p a')
     pyautogui.hotkey('command', 'v')
     pyautogui.press("enter")
-    print("["+datetime.datetime.fromtimestamp(time.time()).strftime('%Y-%m-%d %H:%M:%S')+"]: Upgraded pickaxe...")
+    print("[Action]: Upgraded pickaxe")
     
     time.sleep(3)
 
     pyperclip.copy(';hunt')
     pyautogui.hotkey('command', 'v')
     pyautogui.press("enter")
-    print("["+datetime.datetime.fromtimestamp(time.time()).strftime('%Y-%m-%d %H:%M:%S')+"]: Hunted...")
+    print("[Action]: Hunted")
 
     time.sleep(actionWait)
 
     pyperclip.copy(';sell')
     pyautogui.hotkey('command', 'v')
     pyautogui.press("enter")
-    print(datetime.datetime.fromtimestamp(time.time()).strftime('%Y-%m-%d %H:%M:%S')+"]: Sold...")
+    print("[Action]: Sold")
     
+    print()
+    current_time = time.time()
+    elapsed_time = current_time - start_time
+
+    print("[Info]: Current time: " + datetime.datetime.fromtimestamp(time.time()).strftime('%Y-%m-%d %H:%M:%S'))
+    print("[Info]: Time running: " + strftime("%H:%M:%S", gmtime(elapsed_time)))
+
     if total_loops > 0:
-        print("["+datetime.datetime.fromtimestamp(time.time()).strftime('%Y-%m-%d %H:%M:%S')+"]: All done! Total loops:",total_loops)
-        print("["+datetime.datetime.fromtimestamp(time.time()).strftime('%Y-%m-%d %H:%M:%S')+"]: Looping again...")
+        print("[Info]: Total Loops:", total_loops)
+        print("[Info]: Looping again...")
     else:
-        print("["+datetime.datetime.fromtimestamp(time.time()).strftime('%Y-%m-%d %H:%M:%S')+"]: First loop done. Looping again...")
+        print("[Info]: First loop done")
+        print("[Info]: Looping again...")
     
     if counter_birth > 50:
+        print()
         pyperclip.copy(';rebirth')
         pyautogui.hotkey('command', 'v')
         pyautogui.press("enter")
-        print("["+datetime.datetime.fromtimestamp(time.time()).strftime('%Y-%m-%d %H:%M:%S')+"]: You just started a new life!")
+        print("[Action]: You just started a new life")
 
         counter_birth = 0
 
