@@ -4,8 +4,8 @@ import time
 import datetime
 import random
 
-actionWait = 90
-counter_birth = 0;
+actionWait = 120
+counter_birth = 0
 sellLoop = 1
 loops = 0
 total_loops = 0
