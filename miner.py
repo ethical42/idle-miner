@@ -6,7 +6,9 @@ from time import gmtime
 import datetime
 import random
 
-actionWait = 60
+actionWait = 120 # Change this value if needed
+wait_time = 3 # Change this value if needed
+
 counter_birth = 0
 sellLoop = 1
 loops = 0
@@ -57,7 +59,8 @@ print()
 print("[System]: Booting...")
 print()
 time.sleep(1)
-print("[FYI]: Between each action there's a cooldown for 3 seconds.")
+print("[FYI]: Between each action there's a default cooldown for 3 seconds")
+print("[FYI]: Change the cooldown in miner.py on line: 10")
 print()
 time.sleep(1)
 
@@ -76,7 +79,7 @@ while sellLoop == 1:
     if total_loops > 0:
         print("[Info]: Executing actions...")
         print()
-        time.sleep(3)
+        time.sleep(wait_time)
     
     pyperclip.copy(';sell')
     pyautogui.press("enter")
@@ -86,7 +89,7 @@ while sellLoop == 1:
     pyautogui.press("enter")
     print("[Action]: Sold")
 
-    time.sleep(3)
+    time.sleep(wait_time)
 
     if hours > hours-1 and hour_run == 0:
         pyperclip.copy(';hourly')
@@ -95,7 +98,7 @@ while sellLoop == 1:
         print("[Action]: Hour reward claimed")
         
         hour_run = 0
-        time.sleep(3)
+        time.sleep(wait_time)
 
     if loops > 2:
         pyperclip.copy(';level')
@@ -104,7 +107,7 @@ while sellLoop == 1:
         print("[Action]: Leveled")
         
         loops = 0
-        time.sleep(3)
+        time.sleep(wait_time)
 
     pet = random.choice(pets)
     string = ';up '+pet+' a'
@@ -121,14 +124,14 @@ while sellLoop == 1:
     pyautogui.press("enter")
     print("[Action]: Sold")
     
-    time.sleep(3)
+    time.sleep(wait_time)
 
     pyperclip.copy(';fish')
     pyautogui.hotkey('command', 'v')
     pyautogui.press("enter")
     print("[Action]: Fished")
 
-    time.sleep(3)
+    time.sleep(wait_time)
 
     pyperclip.copy(';up b a')
     pyautogui.hotkey('command', 'v')
@@ -142,14 +145,14 @@ while sellLoop == 1:
     pyautogui.press("enter")
     print("[Action]: Sold")
 
-    time.sleep(3)
+    time.sleep(wait_time)
 
     pyperclip.copy(';up p a')
     pyautogui.hotkey('command', 'v')
     pyautogui.press("enter")
     print("[Action]: Upgraded pickaxe")
     
-    time.sleep(3)
+    time.sleep(wait_time)
 
     pyperclip.copy(';hunt')
     pyautogui.hotkey('command', 'v')
